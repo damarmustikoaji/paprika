@@ -39,6 +39,7 @@ jobs:
       BASE_URL: ${{ vars.BASE_URL }}
       TIMEOUT: 20000
       RETRIES: 1
+      HEADLESS: true
 
     steps:
       - uses: actions/checkout@v4
@@ -74,6 +75,7 @@ jobs:
           echo "BASE_URL=${{ env.BASE_URL }}" >> .env
           echo "TIMEOUT=${{ env.TIMEOUT }}" >> .env
           echo "RETRIES=${{ env.RETRIES }}" >> .env
+          echo "HEADLESS=${{ env.HEADLESS }}" >> .env
           echo "WORKERS=${{ github.event.inputs.WORKERS || '4' }}" >> .env
           echo "BROWSER=${{ github.event.inputs.BROWSER || 'chromium' }}" >> .env
 
@@ -102,7 +104,3 @@ jobs:
         with:
           name: test-results
           path: test-results/
-
-      - name: Show Test Summary
-        if: always()
-        run: npx playwright show-report playwright-report/
