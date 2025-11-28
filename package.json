@@ -1,0 +1,19 @@
+{
+  "name": "paprika",
+  "version": "1.0.0",
+  "description": "Automation Framework (Playwright Murni)",
+  "devDependencies": {
+    "@playwright/test": "^1.40.0",
+    "@types/node": "^20.19.25",
+    "dotenv": "^17.2.3"
+  },
+  "scripts": {
+    "test": "playwright test",
+    "postinstall": "npx playwright install --with-deps",
+    "report": "open ./playwright-report/index.html",
+    "uninstall": "rm -rf node_modules/"
+  },
+  "keywords": [],
+  "author": "damar aji",
+  "license": "ISC"
+}
