@@ -16,7 +16,6 @@ on:
           - cross
           - chromium
           - firefox
-          - webkit
       WORKERS:
         description: "Jumlah workers parallel"
         required: true
@@ -33,6 +32,7 @@ on:
         default: ""
         type: choice
         options:
+          - "@"
           - "@login"
           - "@addtocart"
           - "@removecart"
@@ -49,10 +49,15 @@ jobs:
     env:
       HOME: /root
       HEADLESS: true
-      DOCKER_CONFIG: /dev/null
+      DOCKER_CONFIG: /root/.docker
 
     steps:
       - uses: actions/checkout@v4
+
+      - name: Fix Docker config warning
+        run: |
+          mkdir -p /root/.docker
+          echo "{}" > /root/.docker/config.json
 
       - name: Setup Node.js
         uses: actions/setup-node@v4

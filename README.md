@@ -100,6 +100,10 @@ BROWSER=chromium HEADLESS=false npm run test -- --grep @login
 npm run report
 ```
 
+### Example
+- /docs
+
 ## Github Action
 - Workflows https://github.com/damarmustikoaji/paprika/actions/workflows/playwright.yml
 - Run workflow
+- Report artifact

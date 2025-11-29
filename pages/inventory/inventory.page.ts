@@ -1,14 +1,20 @@
-import { Page, expect, Locator } from '@playwright/test';
+import { Page, Locator } from '@playwright/test';
 
 export class InventoryPage {
     readonly page: Page;
+    readonly inventoryItems: Locator;
+    readonly shoppingCartBadge: Locator;
+    readonly shoppingCartLink: Locator;
 
     constructor(page: Page) {
         this.page = page;
+        this.inventoryItems = page.locator('.inventory_item');
+        this.shoppingCartBadge = page.locator('.shopping_cart_badge');
+        this.shoppingCartLink = page.locator('.shopping_cart_link');
     }
 
     async openProductDetail(productName: string) {
-        const itemCard = this.page.locator('.inventory_item').filter({
+        const itemCard = this.inventoryItems.filter({
             has: this.page.locator('.inventory_item_name', { hasText: productName })
         });
 
@@ -37,12 +43,12 @@ export class InventoryPage {
     }
 
     async getCartCount() {
-        const badge = this.page.locator('.shopping_cart_badge');
+        const badge = this.shoppingCartBadge;
         if (await badge.count() === 0) return 0;
         return parseInt(await badge.innerText());
     }
 
     async gotoCart() {
-        await this.page.click('.shopping_cart_link');
+        await this.shoppingCartLink.click();
     }
 }

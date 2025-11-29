@@ -9,6 +9,8 @@ export class CheckoutPage {
     readonly finishButton: Locator;
     readonly successMessageLocator: Locator;
     readonly errorMessageLocator: Locator;
+    readonly summaryInfoLocator: Locator;
+    readonly shoppingCartLink: Locator;
 
     constructor(page: Page) {
         this.page = page;
@@ -19,6 +21,8 @@ export class CheckoutPage {
         this.finishButton = page.locator('[data-test="finish"]');
         this.successMessageLocator = page.locator('.complete-header');
         this.errorMessageLocator = page.locator('[data-test="error"]');
+        this.summaryInfoLocator = page.locator('.summary_info');
+        this.shoppingCartLink = page.locator('.shopping_cart_link');
     }
 
     async open() {
@@ -36,7 +40,7 @@ export class CheckoutPage {
     }
 
     async verifyOverviewPage() {
-        const overviewLocator = this.page.locator('.summary_info');
+        const overviewLocator = this.summaryInfoLocator;
         await expect(overviewLocator).toBeVisible();
     }
 
@@ -45,13 +49,13 @@ export class CheckoutPage {
     }
 
     async getSuccessMessage() {
-        const successLocator = this.page.locator('.complete-header');
+        const successLocator = this.successMessageLocator;
         await expect(successLocator).toBeVisible();
         return await successLocator.textContent();
     }
 
     async goToCart() {
-        await this.page.click('.shopping_cart_link');
+        await this.shoppingCartLink.click();
     }
 
     async expectError(message: string) {

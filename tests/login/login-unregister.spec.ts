@@ -3,7 +3,7 @@ import { LoginPage } from '../../pages/login/login.pages';
 import { randomString } from '../../utils/helpers';
 import users from '../../data/users.json';
 
-test('@login @negative User cannot login successfully using unregister username', async ({ page }) => {
+test('@login @negative Unregistered user cannot login', async ({ page }) => {
     const login = new LoginPage(page);
     await login.open();
     await login.login(randomString(5), users.validUser.password);

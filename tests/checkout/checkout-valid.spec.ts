@@ -7,7 +7,7 @@ import users from '../../data/users.json';
 import products from '../../data/products.json';
 import checkoutData from '../../data/test_checkout.json';
 
-test('@checkout @positive User can add product to cart successfully', async ({ page }) => {
+test('@checkout @positive Checkout with valid information should succeed', async ({ page }) => {
     const login = new LoginPage(page);
     const inventory = new InventoryPage(page);
     const cart = new CartPage(page);

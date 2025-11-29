@@ -2,7 +2,7 @@ import { test, expect } from '@playwright/test';
 import { LoginPage } from '../../pages/login/login.pages';
 import users from '../../data/users.json';
 
-test('@login @positive Valid user can login', async ({ page }) => {
+test('@login @positive Login with valid credentials should succeed', async ({ page }) => {
   const login = new LoginPage(page);
 
   await login.open();

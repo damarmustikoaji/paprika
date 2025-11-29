@@ -6,7 +6,7 @@ import { CheckoutPage } from '../../pages/checkout/checkout.page';
 import users from '../../data/users.json';
 import products from '../../data/products.json';
 
-test('@checkout @negative User cannot checkout using empty information', async ({ page }) => {
+test('@checkout @negative Checkout with empty information should fail', async ({ page }) => {
     const login = new LoginPage(page);
     const inventory = new InventoryPage(page);
     const cart = new CartPage(page);
