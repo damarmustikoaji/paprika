@@ -48,12 +48,12 @@ jobs:
 
       - name: Write .env file
         run: |
-          echo "BASE_URL=${{ env.BASE_URL }}" >> .env
-          echo "TIMEOUT=${{ env.TIMEOUT }}" >> .env
-          echo "RETRIES=${{ env.RETRIES }}" >> .env
-          echo "HEADLESS=${{ env.HEADLESS }}" >> .env
+          echo "BASE_URL=${{ vars.BASE_URL }}" >> .env
+          echo "TIMEOUT=${{ vars.TIMEOUT }}" >> .env
+          echo "RETRIES=${{ vars.RETRIES }}" >> .env
+          echo "HEADLESS=${{ vars.HEADLESS }}" >> .env
           echo "WORKERS=${{ github.event.inputs.WORKERS || '4' }}" >> .env
-          echo "BROWSER=${{ github.event.inputs.BROWSER || 'chromium' }}" >> .env
+          echo "BROWSER=${{ github.event.inputs.BROWSER || 'cross' }}" >> .env
 
       - name: Run Playwright Tests
         run: npm run test
