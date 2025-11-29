@@ -1,6 +1,24 @@
 # Automation Framework (Playwright Murni)
 
 Automation testing web menggunakan **Playwright Murni** dengan arsitektur **Page Object Model (POM)**.
+Framework ini meng-cover fitur login, cart management, checkout, dan registration pada aplikasi demo Sauce Demo.
+
+## Overview
+- Framework ini dibuat untuk mengotomasi test web e-commerce sederhana.
+- Menggunakan Playwright dengan multi-browser support (chromium, firefox) dan dynamic configuration (HEADLESS, WORKERS, BROWSER).
+- Semua test diorganisasi menggunakan Page Object Model (POM) untuk maintainability dan readability.
+
+## Assumptions
+- Test dijalankan pada staging/demo site https://www.saucedemo.com.
+- User dan product data tersedia di data/users.json dan data/test_products.json.
+- Browser dapat dijalankan headless atau headed sesuai konfigurasi.
+- State awal aplikasi diasumsikan bersih (misal cart kosong) sebelum test dijalankan.
+- Environment variables dikonfigurasi di .env atau Github Actions workflow.
+
+## Challenges & Limitations
+- Playwright di container CI/Github Actions membutuhkan HEADLESS = true untuk Linux agar browser bisa berjalan.
+- Bergantung pada data statis (JSON), sehingga perubahan state di demo site dapat memengaruhi hasil test. Serta masih include didalam repository, jika ada perubahan harus melakukan commit.
+- Registration page belum di implementasi di Sauce Demo.
 
 ## Requirements
 - Node.js v16+
@@ -18,7 +36,7 @@ cp .env.example .env
 
 #### .env
 ```
-BASE_URL=https://www.
+BASE_URL=https://
 TIMEOUT=20000
 RETRIES=0
 WORKERS=4
@@ -65,14 +83,12 @@ BROWSER=chromium HEADLESS=false npm run test -- --grep @login
 ## Project Structure
 ```
 ├── pages/                         
-│   ├── login_page.ts
-│   ├── inventory_page.ts
-│   ├── cart_page.ts
-│   ├── checkout_step_one_page.ts
-│   ├── checkout_step_two_page.ts
-│   └── checkout_complete_page.ts
+│   ├── login.page.ts
+│   └── .page.ts
 │
 ├── tests/                         
+│   ├── login-valid.spec.ts
+│   └── .spec.ts                   
 │
 ├── data/                          
 │   └── users.json
