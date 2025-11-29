@@ -5,12 +5,12 @@ Framework ini meng-cover fitur login, cart management, checkout, dan registratio
 
 ## Overview
 - Framework ini dibuat untuk mengotomasi test web e-commerce sederhana.
-- Menggunakan Playwright dengan multi-browser support (chromium, firefox) dan dynamic configuration (HEADLESS, WORKERS, BROWSER).
+- Menggunakan Playwright dengan multi-browser support (chromium, firefox, webkit) dan dynamic configuration (HEADLESS, WORKERS, BROWSER, RETRIES, BASIC_URL).
 - Semua test diorganisasi menggunakan Page Object Model (POM) untuk maintainability dan readability.
 
 ## Assumptions
-- Test dijalankan pada staging/demo site https://www.saucedemo.com.
-- User dan product data tersedia di data/users.json dan data/test_products.json.
+- Test dijalankan pada demo site https://www.saucedemo.com.
+- User dan product data tersedia di data/users.json dan data/products.json.
 - Browser dapat dijalankan headless atau headed sesuai konfigurasi.
 - State awal aplikasi diasumsikan bersih (misal cart kosong) sebelum test dijalankan.
 - Environment variables dikonfigurasi di .env atau Github Actions workflow.
@@ -90,11 +90,13 @@ BROWSER=chromium HEADLESS=false npm run test -- --grep @login
 │   ├── login-valid.spec.ts
 │   └── .spec.ts                   
 │
-├── data/                          
-│   └── users.json
+├── data/                         
+│   ├── users.json        
+│   └── .json
 │
 ├── utils/                         
-│   └── helpers.ts
+│   ├── helpers.ts        
+│   └── .ts
 │
 ├── .env
 ├── package.json
@@ -105,7 +107,7 @@ BROWSER=chromium HEADLESS=false npm run test -- --grep @login
 ## Features
 - Page Object Model (POM)
 - Dynamic config: browser, headless, workers
-- Multi-browser support
+- Multi-browser support (chromium, firefox, webkit)
 - Test tags
 - Running on Github Action https://github.com/damarmustikoaji/paprika/actions/workflows/playwright.yml
 
