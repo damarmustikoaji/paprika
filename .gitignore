@@ -1,0 +1,17 @@
+# Ignore node modules and IDE settings
+node_modules
+.idea
+.vscode
+.DS_Store
+
+# Ignore environment variable files
+.env
+
+# Ignore test result files
+playwright-report
+test-results
+reports
+videos
+screenshots
+trace
+coverage
