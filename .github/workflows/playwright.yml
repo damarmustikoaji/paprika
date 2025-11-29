@@ -48,7 +48,7 @@ jobs:
       image: mcr.microsoft.com/playwright:v1.49.0-jammy
 
     env:
-      HOME: /github/home
+      HOME: /root
       HEADLESS: true
       DOCKER_CONFIG: $HOME/.docker
 
