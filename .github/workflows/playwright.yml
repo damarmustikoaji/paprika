@@ -34,6 +34,10 @@ jobs:
     container:
       image: mcr.microsoft.com/playwright:v1.49.0-jammy
 
+    env:
+      HOME: /root
+      HEADLESS: true
+
     steps:
       - uses: actions/checkout@v4
 
@@ -51,6 +55,7 @@ jobs:
           echo "BASE_URL=${{ vars.BASE_URL }}" >> .env
           echo "TIMEOUT=${{ vars.TIMEOUT }}" >> .env
           echo "RETRIES=${{ vars.RETRIES }}" >> .env
+          echo "HEADLESS=${{ env.HEADLESS }}" >> .env
           echo "WORKERS=${{ github.event.inputs.WORKERS || '4' }}" >> .env
           echo "BROWSER=${{ github.event.inputs.BROWSER || 'cross' }}" >> .env
 
