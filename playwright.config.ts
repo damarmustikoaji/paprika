@@ -16,7 +16,7 @@ export default defineConfig({
   ],
 
   use: {
-    headless: process.env.HEADLESS === "true",
+    headless: process.env.HEADLESS?.toLowerCase() === "true",
     viewport: { width: 1280, height: 720 },
     video: "on",
     screenshot: "on",
