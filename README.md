@@ -1,7 +1,6 @@
-# Playwright Automation Project (Pure Playwright + POM)
+# Automation Framework (Playwright Murni)
 
-Automation testing project menggunakan **Playwright murni** dengan arsitektur **Page Object Model (POM)**.  
-Mencakup Web UI automation dengan struktur kode yang bersih, modular, dan mudah diperluas.
+Automation testing web menggunakan **Playwright Murni** dengan arsitektur **Page Object Model (POM)**.
 
 ## Requirements
 - Node.js v16+
@@ -15,6 +14,15 @@ Mencakup Web UI automation dengan struktur kode yang bersih, modular, dan mudah 
 git clone <repo-url>
 cd <repo-folder>
 cp .env.example .env
+```
+
+#### .env
+```
+BASE_URL=https://www.
+TIMEOUT=20000
+RETRIES=0
+WORKERS=4
+HEADLESS=true
 ```
 
 ### 2. Install Dependencies
@@ -51,7 +59,7 @@ WORKERS=3 npm run test
 
 ### Run specific tagging
 ```bash
-BROWSER=chromium HEADLESS=false npm run test -- --grep @logintest
+BROWSER=chromium HEADLESS=false npm run test -- --grep @login
 ```
 
 ## Project Structure
@@ -83,12 +91,15 @@ BROWSER=chromium HEADLESS=false npm run test -- --grep @logintest
 - Dynamic config: browser, headless, workers
 - Multi-browser support
 - Test tags
-- Running on Github Action
+- Running on Github Action https://github.com/damarmustikoaji/paprika/actions/workflows/playwright.yml
 
 ## Reporting
 
 ### Generate HTML Report
 ```bash
 npm run report
-npx playwright show-report
 ```
+
+## Github Action
+- Workflows https://github.com/damarmustikoaji/paprika/actions/workflows/playwright.yml
+- Run workflow

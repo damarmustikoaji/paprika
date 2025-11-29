@@ -31,15 +31,8 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
-    concurrency:
-      group: ${{ github.workflow }}-${{ github.ref }}
-      cancel-in-progress: true
-
-    env:
-      BASE_URL: ${{ vars.BASE_URL }}
-      TIMEOUT: 20000
-      RETRIES: 1
-      HEADLESS: true
+    container:
+      image: mcr.microsoft.com/playwright:v1.49.0-jammy
 
     steps:
       - uses: actions/checkout@v4
@@ -48,27 +41,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 18
-
-      - name: Cache npm dependencies
-        uses: actions/cache@v3
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: ${{ runner.os }}-npm-
+          cache: 'npm'
 
       - name: Install dependencies
         run: npm ci
-
-      - name: Cache Playwright browsers
-        uses: actions/cache@v3
-        with:
-          path: ~/.cache/ms-playwright
-          key: ${{ runner.os }}-playwright-${{ hashFiles('**/package.json') }}
-          restore-keys: |
-            ${{ runner.os }}-playwright-
-
-      - name: Install Playwright Browsers
-        run: npx playwright install --with-deps
 
       - name: Write .env file
         run: |
@@ -79,17 +55,8 @@ jobs:
           echo "WORKERS=${{ github.event.inputs.WORKERS || '4' }}" >> .env
           echo "BROWSER=${{ github.event.inputs.BROWSER || 'chromium' }}" >> .env
 
-      - name: Run Playwright Tests (with input)
-        if: github.event_name == 'workflow_dispatch' && github.event.inputs.BROWSER != ''
-        run: |
-          echo "Running with browser: ${{ github.event.inputs.BROWSER }}"
-          BROWSER=${{ github.event.inputs.BROWSER }} npm run test
-
-      - name: Run Playwright Tests (default .env)
-        if: github.event_name != 'workflow_dispatch' || github.event.inputs.BROWSER == ''
-        run: |
-          echo "Running with default .env browser"
-          npm run test
+      - name: Run Playwright Tests
+        run: npm run test
 
       - name: Upload HTML Report
         if: always()
