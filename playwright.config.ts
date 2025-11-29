@@ -32,9 +32,11 @@ function getProjects() {
   const map: any = {
     chromium: [{ name: "chromium", use: { browserName: "chromium" } }],
     firefox: [{ name: "firefox", use: { browserName: "firefox" } }],
+    webkit: [{ name: "webkit", use: { browserName: "webkit" } }],
     cross: [
       { name: "chromium", use: { browserName: "chromium" } },
-      { name: "firefox", use: { browserName: "firefox" } }
+      { name: "firefox", use: { browserName: "firefox" } },
+      { name: "webkit", use: { browserName: "webkit" } }
     ]
   };
 

@@ -16,6 +16,7 @@ on:
           - cross
           - chromium
           - firefox
+          - webkit
       WORKERS:
         description: "Jumlah workers parallel"
         required: true
@@ -47,17 +48,17 @@ jobs:
       image: mcr.microsoft.com/playwright:v1.49.0-jammy
 
     env:
-      HOME: /root
+      HOME: /github/home
       HEADLESS: true
-      DOCKER_CONFIG: /root/.docker
+      DOCKER_CONFIG: $HOME/.docker
 
     steps:
       - uses: actions/checkout@v4
 
       - name: Fix Docker config warning
         run: |
-          mkdir -p /root/.docker
-          echo "{}" > /root/.docker/config.json
+          mkdir -p $HOME/.docker
+          echo "{}" > $HOME/.docker/config.json
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
